@@ -1,7 +1,5 @@
 package com.athiley.devlibrary.controllers
 
-import com.athiley.devlibrary.DevLibraryApplication
-import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

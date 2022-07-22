@@ -2,7 +2,7 @@ package com.athiley.devlibrary.models
 
 import org.springframework.data.annotation.Id
 
-class Books(var name: String?, private var isRead: Boolean?, @Id var isbnId: Number?) {
+class Book(var name: String?, private var isRead: Boolean?, @Id var isbnId: Number?) {
 
     override fun toString(): String {
         return String.format(
