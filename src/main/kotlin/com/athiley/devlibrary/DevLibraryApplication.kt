@@ -19,7 +19,10 @@ class AccessingDataMongodbApplication : CommandLineRunner {
 		repository.save(Book("Travessuras da menina má", true, 8573028084))
 
 		val readBooks = repository.findByIsRead(true)
-		println(readBooks)
+
+		readBooks.forEach {
+			println("The book '${it.name}' was read this year!!!")
+		}
 	}
 
 	companion object {
