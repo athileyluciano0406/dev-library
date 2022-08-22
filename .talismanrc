@@ -1,0 +1,8 @@
+fileignoreconfig:
+- filename: dist/svelte-bundle.js
+  checksum: 390fc2749127eba6901f4683310661830f735a0458b3f38cdc6bf0b3ec4f4417
+- filename: dist/svelte-bundle.js.map
+  checksum: bb52dfc85766c7a30cd78211de4faab4e254500cc406064e0c7d8e19c5862e49
+- filename: svelte-components/package-lock.json
+  checksum: 87e7e9f2ddb2e61016c34b1e977141c235e929cc0a7de7e65a975e62358e55b1
+version: "1.0"
