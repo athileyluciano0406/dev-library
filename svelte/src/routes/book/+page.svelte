@@ -3,10 +3,17 @@
         const response = await fetch('http://localhost:8080/book')
         return await response.json()
     }
+    const booksPromise = response()
 
-    response().then(
-        function(data) { data.forEach(book => (console.log(book.name))) }
-    );
 </script>
+{#await booksPromise then listOfBooks}
+    {#each listOfBooks as book}
+        <p>{book.name}</p>
+        <p>{book.isbnId}</p>
+        <p>{book.isRead}</p>
+    {/each}
+
+{/await}
+
 
 
