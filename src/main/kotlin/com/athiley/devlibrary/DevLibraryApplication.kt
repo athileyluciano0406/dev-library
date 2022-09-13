@@ -14,14 +14,14 @@ class AccessingDataMongodbApplication : CommandLineRunner {
 
 	override fun run(vararg args: String) {
 
-		repository.save(Book("Sapiens", false, 9780062316097))
-		repository.save(Book("Por si las voces vuelven", false, 8408249215))
-		repository.save(Book("Travessuras da menina má", false, 8573028084))
+		repository.save(Book("Sapiens", false, "9780062316097"))
+		repository.save(Book("Por si las voces vuelven", false, "8408249215"))
+		repository.save(Book("Travessuras da menina má", false, "8573028084"))
 
 		val readBooks = repository.findByIsRead(true)
 
 		readBooks.forEach {
-			println("The book '${it.name}' was read this year!!!")
+			println("The book '${it.title}' was read this year!!!")
 		}
 	}
 

@@ -6,15 +6,15 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document("books")
 class Book(
-    var name: String?,
+    var title: String?,
     var isRead: Boolean?,
-    @Id var isbnId: Number?
+    @Id var isbnId: String?
     ) {
 
     override fun toString(): String {
         return String.format(
             "com.athiley.devlibrary.models.Customer[id=%s, firstName='%s', lastName='%s']",
-            isbnId, name, isRead
+            isbnId, title, isRead
         )
     }
 }
