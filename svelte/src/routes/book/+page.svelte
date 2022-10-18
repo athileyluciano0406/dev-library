@@ -26,24 +26,26 @@
         result = JSON.stringify(json)
     }
 </script>
+<div class="library-page">Library</div>
 
-<input bind:value={title} />
-<input bind:value={isbn} />
-<button type="button" on:click={doPost}>
-    Post book.
-</button>
-<p>
-    Result:
-</p>
-<pre>
-{result}
-</pre>
+<div class="add-new-book">
+    <h1>Would you like to add a new book to your list?</h1>
+    <input bind:value={title} />
+    <input bind:value={isbn} />
+    <button type="button" on:click={doPost}>
+        Post book.
+    </button>
+<!--    <pre>-->
+<!--        {result}-->
+<!--    </pre>-->
+</div>
+
 
 <div>
     {#await booksPromise then listOfBooks}
         <div>
             {#each listOfBooks as book}
-                <div class="book">
+                <div class="book-element">
                     <h1>Title</h1>
                     <div class="book-title">{book.title}</div>
                     <h2>ISBN</h2>
@@ -66,19 +68,19 @@
 </div>
 
 <style>
-    .book {
-        display: flex;
+    .book-element {
         margin: 20px;
+        padding: 20px;
         background-color: #d0b5ac;
+        display: inline-block;
     }
-    .book-title {
+    .library-page {
         margin: 20px;
+        font-size: 60px;
     }
-    .book-isbn {
-        margin: 20px;
-    }
-    .book-is-read {
-        margin: 20px;
+
+    .add-new-book {
+        padding: 20px;
     }
 </style>
 
