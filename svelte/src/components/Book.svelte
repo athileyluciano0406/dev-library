@@ -27,6 +27,7 @@
         const json = await res.json()
         result = JSON.stringify(json)
     }
+
 </script>
 
 <div class="add-new-book">
@@ -36,23 +37,21 @@
     <button type="button" on:click={doPost}>
         Post book.
     </button>
-    <!--    <pre>-->
-    <!--        {result}-->
-    <!--    </pre>-->
 </div>
 
 <div>
+    {result}
     {#await booksPromise then listOfBooks}
         <div>
             {#each listOfBooks as book}
                 <div class="book-element">
                     <h1>Title</h1>
-                    <div>{Book.title}</div>
+                    <div>{book.title}</div>
                     <h2>ISBN</h2>
-                    <div>{Book.isbnId}</div>
+                    <div>{book.isbnId}</div>
                     <h2>Have you read this book?</h2>
                     <div>
-                        {#if Book.isRead === true}
+                        {#if book.isRead === true}
                             <p>Yes</p>
                         {:else } <p>No</p>
                         {/if}

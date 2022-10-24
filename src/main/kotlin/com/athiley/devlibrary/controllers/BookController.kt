@@ -27,10 +27,16 @@ class BookController(
     @PostMapping
     @CrossOrigin(origins = ["http://127.0.0.1:5173"])
     fun addBook(@RequestBody addBookRequest : AddBookRequest) : ResponseEntity<Book>{
-        val book = bookService.addBooks(addBookRequest.title, addBookRequest.isbn)
+        val book = bookService.addBook(addBookRequest.title, addBookRequest.isbn)
 
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(book)
+    }
+
+    @DeleteMapping("/{isbn}")
+    fun deleteBook(@PathVariable("isbn") isbn : String) : ResponseEntity<Unit>{
+        bookService.deleteBook(isbn)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }
 

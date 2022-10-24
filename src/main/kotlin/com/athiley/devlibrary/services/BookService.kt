@@ -10,10 +10,19 @@ class BookService (private val bookRepository : BookRepository){
         return bookRepository.findByIsRead(isRead)
     }
 
-    fun addBooks(title: String, isbn: String): Book {
+    fun addBook(title: String, isbn: String): Book {
         val isRead = false
         val book = Book(title, isRead, isbn)
         bookRepository.save(book)
         return book
+    }
+
+    fun deleteBook(isbn: String) {
+        val bookToBeFound = bookRepository.findById(isbn)
+        bookToBeFound.takeIf { it.isPresent }
+            ?.get()
+            ?.let { book ->
+                bookRepository.delete(book)
+            }
     }
 }
