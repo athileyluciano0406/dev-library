@@ -1,6 +1,4 @@
 <script>
-    import Book from "./Book.svelte";
-
     async function response () {
         const response = await fetch('http://localhost:8080/book')
         if(response.status !== 200){

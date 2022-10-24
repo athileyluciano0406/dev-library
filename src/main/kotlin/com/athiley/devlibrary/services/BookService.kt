@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class BookService (private val bookRepository : BookRepository){
-    fun fetchBooks(isRead: Boolean) : List<Book> {
-        return bookRepository.findByIsRead(isRead)
+    fun fetchBooks() : List<Book> {
+        return bookRepository.findAll()
     }
 
     fun addBook(title: String, isbn: String): Book {
@@ -23,6 +23,17 @@ class BookService (private val bookRepository : BookRepository){
             ?.get()
             ?.let { book ->
                 bookRepository.delete(book)
+            }
+    }
+
+    fun updateBook(book: Book) {
+        bookRepository.findById(book.isbnId!!)
+            .takeIf { it.isPresent }
+            ?.get()
+            ?.let { bookFound ->
+                bookFound.title = book.title
+                bookFound.isRead = book.isRead
+                bookRepository.save(bookFound)
             }
     }
 }
