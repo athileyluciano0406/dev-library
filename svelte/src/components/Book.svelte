@@ -1,18 +1,24 @@
 <script>
-    async function response () {
-        const response = await fetch('http://localhost:8080/book')
-        if(response.status !== 200){
-            throw new Error()
+    import {onMount} from "svelte";
+
+    let books;
+
+    onMount(async () => {
+        async function response() {
+            const response = await fetch('http://localhost:8080/book')
+            if (response.status !== 200) {
+                return null
+            }
+            return await response.json()
         }
-        return await response.json()
-    }
-    const booksPromise = response()
+
+        books = await response()
+    })
 
     let title = ''
     let isbn = ''
-    let result = null
 
-    async function doPost () {
+    async function doPost() {
         const res = await fetch('http://localhost:8080/book', {
             method: 'POST',
             body: JSON.stringify({
@@ -22,27 +28,26 @@
             headers: {"Content-Type": "application/json", Accept: "*/*"}
         })
 
-        const json = await res.json()
-        result = JSON.stringify(json)
+        const newBook = await res.json()
+        books.push(newBook)
+        books = books
     }
-
 </script>
 
 <div class="add-new-book">
     <h1>Would you like to add a new book to your list?</h1>
-    <input bind:value={title} />
-    <input bind:value={isbn} />
+    <input bind:value={title}/>
+    <input bind:value={isbn}/>
     <button type="button" on:click={doPost}>
         Post book.
     </button>
 </div>
 
 <div>
-    {result}
-    {#await booksPromise then listOfBooks}
-        <div>
-            {#each listOfBooks as book}
-                <div class="book-element">
+    {#if books}
+        {#each books as book}
+            <div class="book-element">
+                <div>
                     <h1>Title</h1>
                     <div>{book.title}</div>
                     <h2>ISBN</h2>
@@ -55,13 +60,11 @@
                         {/if}
                     </div>
                 </div>
+            </div>
             {:else}
-                <p>Sorry, you have no books to display :( </p>
-            {/each}
-        </div>
-    {:catch error}
-        <p style="color: red">Sorry, that's sad, something went wrong :( </p>
-    {/await}
+            <p>Sorry, you have no books to display :( </p>
+        {/each}
+    {/if}
 </div>
 
 <style>
